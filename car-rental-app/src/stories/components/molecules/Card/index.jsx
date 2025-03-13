@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
+import { NavLink } from "react-router";
 const CardItem = ({ car }) => {
   return (
     <Card className="position-relative my-3">
@@ -21,7 +22,9 @@ const CardItem = ({ car }) => {
           <span className="text-secondary">Günlük Ücret: </span> {car.price} ₺
         </Card.Text>
 
-        <Button variant="primary">Hemen Kirala</Button>
+        <NavLink to={`/car/${car.id}`} className="btn btn-primary">
+          İncele
+        </NavLink>
       </Card.Body>
       <Badge
         bg={`${car.rentalState == true ? "success" : "danger"}`}

@@ -8,17 +8,32 @@ import {
 } from "firebase/firestore";
 import { doc, getDoc, getDocs } from "firebase/firestore";
 
-export async function getCars() {
+export async function getCar(id) {
+  const carRef = doc(db, "cars", id);
+  const carSnap = await getDoc(carRef);
+  return carSnap.data();
+}
+export async function getFilteredCars(model, minPrice, maxPrice, rentalState) {
   try {
-    const querySnapshot = await getDocs(collection(db, "cars"));
-    const cars = querySnapshot.docs.map((doc) => ({
+    const carsCollection = collection(db, "cars");
+    let filters = [
+      where("price", ">=", minPrice),
+      where("price", "<=", maxPrice),
+      where("rentalState", "==", rentalState),
+    ];
+    if (model !== "") {
+      filters.push(where("model", "==", model));
+    }
+    const carsQuery = query(carsCollection, ...filters);
+    const snapshot = await getDocs(carsQuery);
+    const filteredCars = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
-    console.log(cars);
-    return cars;
+    console.log("filter", filteredCars);
+    return filteredCars;
   } catch (error) {
-    console.error("Araba bilgileri alınamadı", error);
+    console.error("Filtreleme Yapılamadı", error);
   }
 }
 export async function getModels() {
