@@ -28,9 +28,9 @@ const CardItem = ({ car }) => {
       </Card.Body>
       <Badge
         bg={`${car.rentalState == true ? "success" : "danger"}`}
-        className="position-absolute end-0 top-0 rounded-circle p-2 m-2"
+        className="position-absolute end-0 top-0 rounded p-2 m-2"
       >
-        R
+        Kirala
       </Badge>
     </Card>
   );

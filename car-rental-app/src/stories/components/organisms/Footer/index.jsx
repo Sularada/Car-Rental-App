@@ -8,7 +8,7 @@ const Footer = () => {
         <Stack
           direction="horizontal"
           gap={4}
-          className="justify-content-between "
+          className="justify-content-between flex-wrap"
         >
           <Stack className="logo">
             <img

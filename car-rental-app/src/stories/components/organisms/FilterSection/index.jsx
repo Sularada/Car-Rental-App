@@ -94,7 +94,7 @@ const FilterSection = ({ models, setFilters }) => {
               }}
               className="w-100"
             >
-              {"To Rent"}
+              {"Kiralık"}
             </ToggleButton>
             <ToggleButton
               className="w-100"
@@ -106,7 +106,7 @@ const FilterSection = ({ models, setFilters }) => {
                 setRentalState(false);
               }}
             >
-              {"Rentaled"}
+              {"Kiralanmış"}
             </ToggleButton>
           </ButtonGroup>
         </Col>
