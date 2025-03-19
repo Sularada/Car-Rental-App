@@ -1,21 +1,33 @@
 import { useEffect, useState } from "react";
 import CardItem from "../../molecules/Card";
-import { useParams } from "react-router";
-import { getCar } from "../../../../firebase/dbController";
+import { useNavigate, useParams } from "react-router";
+import { getCar, updateRentalState } from "../../../../firebase/dbController";
 import { Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 
 const ReservationPage = () => {
   const { id } = useParams();
   const [car, setCar] = useState();
   const [validated, setValidated] = useState(false);
-  const date = new Date();
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(
+    new Date(
+      `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${
+        startDate.getDate() + 2
+      }`
+    )
+  );
+  console.log(startDate);
+  let navigate = useNavigate();
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    } else {
+      updateRentalState(id, false);
+      alert("Rezervasyon işlemi başarılı!");
+      navigate("/");
     }
-
     setValidated(true);
   };
   useEffect(() => {
@@ -78,20 +90,21 @@ const ReservationPage = () => {
                   <Col md="6">
                     <Form.Control
                       type="date"
-                      min={date.toJSON().slice(0, 10)}
+                      value={startDate.toJSON().slice(0, 10)}
+                      min={startDate.toJSON().slice(0, 10)}
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                        setStartDate(new Date(e.target.value));
+                      }}
                       required
                     />
                   </Col>
                   <Col md="6">
                     <Form.Control
                       type="date"
-                      min={new Date(
-                        `${date.getFullYear()}-${date.getMonth() + 1}-${
-                          date.getDate() + 2
-                        }`
-                      )
-                        .toJSON()
-                        .slice(0, 10)}
+                      min={endDate.toJSON().slice(0, 10)}
+                      onChange={(e) => setEndDate(new Date(e.target.value))}
+                      value={endDate.toJSON().slice(0, 10)}
                       required
                     />
                   </Col>
