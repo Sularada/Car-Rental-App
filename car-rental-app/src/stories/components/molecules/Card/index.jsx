@@ -22,9 +22,11 @@ const CardItem = ({ car }) => {
           <span className="text-secondary">Günlük Ücret: </span> {car.price} ₺
         </Card.Text>
 
-        <NavLink to={`/car/${car.id}`} className="btn btn-primary">
-          İncele
-        </NavLink>
+        {car.id && (
+          <NavLink to={`/car/${car.id}`} className="btn btn-primary">
+            İncele
+          </NavLink>
+        )}
       </Card.Body>
       <Badge
         bg={`${car.rentalState == true ? "success" : "danger"}`}

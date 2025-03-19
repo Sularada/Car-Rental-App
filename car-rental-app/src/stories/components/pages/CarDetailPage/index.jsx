@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { getCar } from "../../../../firebase/dbController";
 import { NavLink, useParams } from "react-router";
 
@@ -27,23 +27,23 @@ function CarDetailPage() {
                   <Card.Title>{car.model}</Card.Title>
                   <Card.Text className="d-flex gap-3">
                     <span>
-                      <i class="bi bi-fuel-pump me-1"></i>{" "}
+                      <i className="bi bi-fuel-pump me-1"></i>{" "}
                       {car.fuel.charAt(0).toUpperCase() + car.fuel.slice(1)}
                     </span>
                     <span>
-                      <i class="bi bi-gear me-1"></i>{" "}
+                      <i className="bi bi-gear me-1"></i>{" "}
                       {car.type.charAt(0).toUpperCase() + car.type.slice(1)}
                     </span>
                     <span>
-                      <i class="bi bi-person-square me-1"></i> {car.driverAge}+
-                      yaş
+                      <i className="bi bi-person-square me-1"></i>{" "}
+                      {car.driverAge}+ yaş
                     </span>
                     <span>
-                      <i class="bi bi-speedometer2 me-1"></i> {car.km} KM
+                      <i className="bi bi-speedometer2 me-1"></i> {car.km} KM
                     </span>
 
                     <span>
-                      <i class="bi bi-wallet2 me-1"></i> {car.deposit} TL
+                      <i className="bi bi-wallet2 me-1"></i> {car.deposit} TL
                     </span>
                   </Card.Text>
                 </Card.Body>
@@ -57,12 +57,18 @@ function CarDetailPage() {
             <Card.Body>
               <Card.Title>Günlük Ödeme</Card.Title>
               <Card.Text>{car.price} TL</Card.Text>
-              <NavLink
-                className="btn btn-success w-100"
-                to={`/reservation/${car.id}`}
-              >
-                Hemen Kirala
-              </NavLink>
+              {car.rentalState ? (
+                <NavLink
+                  className="btn btn-success w-100"
+                  to={`/reservation/${id}`}
+                >
+                  Hemen Kirala
+                </NavLink>
+              ) : (
+                <Button className="btn btn-secondary w-100" disabled>
+                  Hemen Kirala
+                </Button>
+              )}
             </Card.Body>
           </Card>
         </Col>
