@@ -1,5 +1,5 @@
 import { Form } from "react-bootstrap";
-import Option from "../../atoms/option";
+import Option from "../../atoms/Option";
 
 const Select = ({ models, defOption, ...props }) => {
   return (
