@@ -5,7 +5,10 @@ const NavbarPart = () => {
   return (
     <Navbar className="bg-body-tertiary p-0">
       <Container className=" justify-content-center">
-        <NavLink to="/" className="text-decoration-none">
+        <NavLink
+          to="/"
+          className="text-decoration-none d-flex align-items-center gap-3"
+        >
           <img
             alt="Logo"
             src="https://images.template.net/83682/free-simple-car-illustration-3v7wz.jpg"

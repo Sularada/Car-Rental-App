@@ -9,8 +9,9 @@ import {
 import { useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Stack from "react-bootstrap/esm/Stack";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
+import { FilterSelect, FilterInputGroup } from "../../molecules/FilterFormItem";
+import Label from "../../atoms/Label";
+import { ButtonItem } from "../../atoms/Button";
 const FilterSection = ({ models, setFilters }) => {
   const [model, setModel] = useState("");
   const [min, setMin] = useState(0);
@@ -41,48 +42,36 @@ const FilterSection = ({ models, setFilters }) => {
     <Container className="my-3">
       <Row xs={1} md={2} lg={4}>
         <Col>
-          <FormLabel>Model</FormLabel>
-          <Form.Select
-            aria-label="Default select example"
-            onChange={(e) => setModel(e.target.value)}
-            value={model}
-          >
-            <option value="">Model Seçiniz</option>
-            {models &&
-              models.map((model, index) => {
-                return (
-                  <option key={index} value={model}>
-                    {model}
-                  </option>
-                );
-              })}
-          </Form.Select>
+          <FilterSelect
+            label="Model"
+            setModel={setModel}
+            ariaLabel="Model Select"
+            models={models}
+            model={model}
+            defOption="Model Seçiniz"
+          />
         </Col>
         <Col>
           <Stack>
             <FormLabel>Ücret</FormLabel>
             <Stack direction="horizontal" gap={4}>
-              <InputGroup>
-                <Form.Control
-                  aria-label="min price"
-                  value={min}
-                  onChange={(e) => setMin(e.target.value)}
-                />
-                <InputGroup.Text>₺</InputGroup.Text>
-              </InputGroup>
-              <InputGroup>
-                <Form.Control
-                  aria-label="max price"
-                  value={max}
-                  onChange={(e) => setMax(e.target.value)}
-                />
-                <InputGroup.Text>₺</InputGroup.Text>
-              </InputGroup>
+              <FilterInputGroup
+                text="₺"
+                aria-label="min price"
+                value={min}
+                onChange={(e) => setMin(e.target.value)}
+              />
+              <FilterInputGroup
+                text="₺"
+                aria-label="max price"
+                value={max}
+                onChange={(e) => setMax(e.target.value)}
+              />
             </Stack>
           </Stack>
         </Col>
         <Col>
-          <FormLabel>Kiralama</FormLabel>
+          <Label>Kiralama</Label>
           <ButtonGroup className="d-flex w-100">
             <ToggleButton
               type="radio"
@@ -111,16 +100,13 @@ const FilterSection = ({ models, setFilters }) => {
           </ButtonGroup>
         </Col>
         <Col className="d-flex align-items-bottom gap-2">
-          <Button onClick={applyFilters} className="mt-auto w-100">
-            Uygula
-          </Button>
-          <Button
+          <ButtonItem onClick={applyFilters} children=" Uygula" />
+
+          <ButtonItem
             variant="danger"
             onClick={clearFilters}
-            className="mt-auto w-100"
-          >
-            Temizle
-          </Button>
+            children="Temizle"
+          />
         </Col>
       </Row>
     </Container>

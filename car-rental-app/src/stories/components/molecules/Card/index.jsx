@@ -2,7 +2,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
 import { NavLink } from "react-router";
-const CardItem = ({ car }) => {
+import { Col, Row } from "react-bootstrap";
+export const CardItem = ({ car }) => {
   return (
     <Card className="position-relative my-3">
       <Card.Img
@@ -38,4 +39,62 @@ const CardItem = ({ car }) => {
   );
 };
 
-export default CardItem;
+export const DetailCardItem = ({ car }) => {
+  return (
+    <Card className="my-3 h-100">
+      <Card.Header>Araç Bilgileri</Card.Header>
+      <Row>
+        <Col xs={12} md={5}>
+          <Card.Img src={car.image} />
+        </Col>
+        <Col xs={12} md={7}>
+          <Card.Body>
+            <Card.Title>{car.model}</Card.Title>
+            <Card.Text className="d-flex flex-wrap gap-4">
+              <span>
+                <i className="bi bi-fuel-pump me-1"></i>{" "}
+                {car.fuel.charAt(0).toUpperCase() + car.fuel.slice(1)}
+              </span>
+              <span>
+                <i className="bi bi-gear me-1"></i>{" "}
+                {car.type.charAt(0).toUpperCase() + car.type.slice(1)}
+              </span>
+              <span>
+                <i className="bi bi-person-square me-1"></i> {car.driverAge}+
+                yaş
+              </span>
+              <span>
+                <i className="bi bi-speedometer2 me-1"></i> {car.km} KM
+              </span>
+
+              <span>
+                <i className="bi bi-wallet2 me-1"></i> {car.deposit} TL
+              </span>
+            </Card.Text>
+          </Card.Body>
+        </Col>
+      </Row>
+    </Card>
+  );
+};
+
+export const PriceCardItem = ({ car, id }) => {
+  return (
+    <Card className="my-3">
+      <Card.Header>Toplam Tutar</Card.Header>
+      <Card.Body>
+        <Card.Title>Günlük Ödeme</Card.Title>
+        <Card.Text>{car.price} TL</Card.Text>
+        {car.rentalState ? (
+          <NavLink className="btn btn-success w-100" to={`/reservation/${id}`}>
+            Hemen Kirala
+          </NavLink>
+        ) : (
+          <Button className="btn btn-secondary w-100" disabled>
+            Hemen Kirala
+          </Button>
+        )}
+      </Card.Body>
+    </Card>
+  );
+};

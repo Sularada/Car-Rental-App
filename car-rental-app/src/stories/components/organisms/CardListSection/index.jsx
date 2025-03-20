@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/esm/Container";
-import CardItem from "../../molecules/Card";
+import { CardItem } from "../../molecules/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useEffect, useState } from "react";
