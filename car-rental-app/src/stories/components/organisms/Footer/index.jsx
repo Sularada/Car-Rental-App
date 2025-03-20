@@ -3,7 +3,10 @@ import Stack from "react-bootstrap/Stack";
 
 const Footer = () => {
   return (
-    <footer className="position-absolute bottom-0 w-100 bg-body-tertiary p-4">
+    <footer
+      style={{ maxHeight: "300px", overflow: "scroll" }}
+      className="position-absolute bottom-0 w-100 bg-body-tertiary p-4"
+    >
       <Container>
         <Stack
           direction="horizontal"

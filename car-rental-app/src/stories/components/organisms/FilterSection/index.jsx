@@ -71,7 +71,7 @@ const FilterSection = ({ models, setFilters }) => {
           </Stack>
         </Col>
         <Col>
-          <Label>Kiralama</Label>
+          <Label label="Kiralama"></Label>
           <ButtonGroup className="d-flex w-100">
             <ToggleButton
               type="radio"
@@ -99,7 +99,7 @@ const FilterSection = ({ models, setFilters }) => {
             </ToggleButton>
           </ButtonGroup>
         </Col>
-        <Col className="d-flex align-items-bottom gap-2">
+        <Col className="d-flex align-items-bottom gap-2 mt-2">
           <ButtonItem onClick={applyFilters} children=" Uygula" />
 
           <ButtonItem
